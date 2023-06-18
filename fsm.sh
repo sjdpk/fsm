@@ -43,7 +43,8 @@ versionSwitch(){
     if [ "$oldName" = "$newName" ]; then
         echo -e "\e[1m\e[34m You are already using Flutter version $oldName\e[0m"
     else
-        availableVersions=($(ls "$flutterDir" | grep -oP "(?<=flutter-).+"))
+        # availableVersions=($(ls "$flutterDir" | grep -oP "(?<=flutter-).+"))
+        availableVersions=($(ls "$flutterDir" | sed -n 's/flutter-\(.*\)/\1/p'))
         versionMatch=0
         for version in "${availableVersions[@]}"; do
         if [ "$version" = "$newVersion" ]; then
