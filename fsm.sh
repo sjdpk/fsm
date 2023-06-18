@@ -64,15 +64,14 @@ versionSwitch(){
           break
       fi
       done
-
-     if [ "$versionMatch" -eq 0 ]; then
+    echo -e "$flutterSwitchText"
+    if [ "$versionMatch" -eq 0 ]; then
       echo -e "\e[1m\e[31m Flutter version $newName is not available\e[0m"
       versionList
       else
       cd "$flutterDir"
       sudo mv "flutter" "$oldName"
       sudo mv "$newName" "flutter"
-      echo -e "$flutterSwitchText"
       echo -ne "\e[1m\e[34m Switching Progress: \e[0m"
       for ((i=1; i<=10; i++)); do
           echo -n "="
