@@ -52,6 +52,14 @@ fsm -switch <version>
 eg: fsm -switch "3.10.4"
 ```
 
+###FAQ 
+
+1. > fsm not found
+Add this line at the end of your shell (eg: bashrc/zshrc) file
+			 ...
+			...
+			source ~/.fsm/fsm.sh
+
 ## Contributing
 
 I welcome and appreciate contributions from the community! Whether you want to report a bug, request a new feature, or submit a pull request, please feel free to contribute to this project and help make it even better.
