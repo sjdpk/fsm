@@ -45,6 +45,12 @@ Current fsm Version
 fsm --version
 ```
 
+Update fsm Version
+
+```
+fsm --update
+```
+
 List all Flutter SDK versions
 
 ```

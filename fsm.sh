@@ -22,6 +22,8 @@ fsm() {
     help
   elif [[ $1 == "--version" ]]; then
     fsmVersion
+  elif [[ $1 == "--update" ]]; then
+    fsmUpdate
   elif [[ $1 == "--now" ]]; then
     fsmNow
   elif [[ $1 == "-switch" ]]; then
@@ -109,6 +111,7 @@ help() {
   echo -e "$flutterSwitchText"
   echo "--help : for fsm help"
   echo "--version : current fsm version"
+  echo "--update : current fsm version"
   echo "--now : current flutter version"
   echo "--list : for list all available versions"
   echo "-switch <version> : switch flutter sdk version"
@@ -119,4 +122,12 @@ help() {
 fsmNow() {
   echo -e "$flutterSwitchText"
   flutter --version
+}
+
+# @desc: update fsm
+# @usage :  fsm --update
+fsmUpdate() {
+  echo -e "$flutterSwitchText"
+  rm -rf ~/.fsm
+  git clone https://github.com/sjdpk/fsm.git ~/.fsm  && source ~/.bashrc
 }
