@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version ='1.0.0'
+version='1.0.0'
 flutterSwitchText='\e[1m\e[33m
   ______ _____ __  __ 
  |  ____/ ____|  \/  |
@@ -39,7 +39,7 @@ fsm() {
 # @usage :  fsm --version
 fsmVersion() {
   echo -e "$flutterSwitchText"
-  echo "fsm 1.0.0"
+  echo "fsm @$version"
 }
 
 # @desc : version switch
