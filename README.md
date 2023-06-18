@@ -1,1 +1,54 @@
-# fsm
+## fsm : Flutter SDK (Version) Management Tool
+[![Build sjdpk](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/sjdpk/fsm)
+
+## Description
+
+`fsm` is a bash script that simplifies switching between different versions of Flutter on your development environment.
+
+## **NOTE**
+Flutter SDK folder must follow this pattern
+`flutter-<version>`
+eg:  ```flutter-3.10.4```
+
+### To Know your shell 
+    echo $SHELL
+## Installation To `bash` shell
+
+Clone the repository to your local machine and add the sourcing command:
+   ```
+   git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc 
+```
+
+## Installation To `zsh` shell
+
+Clone the repository to your local machine and add the sourcing command:
+   ```
+   git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc
+  ```
+
+## Usage
+To switch to a different version of Flutter, use the `fsm` command followed by the desired version:
+
+```
+fsm -switch <version>
+```
+For example, to switch to Flutter version 3.10.4, run:
+
+```
+fsm -switch "3.10.4"
+```
+
+Available versions can be listed using the flutter_versions command:
+
+```
+flutter_versions
+```
+## Contributing
+
+I welcome and appreciate contributions from the community! Whether you want to report a bug, request a new feature, or submit a pull request, please feel free to contribute to this project and help make it even better.
+ 
+
+
+### Bug Reports and Feature Requests
+
+If you encounter a bug or have a feature request, please open an issue on the [Issue Tracker](https://github.com/sjdpk/fsm/issues). Be sure to provide detailed information about the problem you encountered or the feature you'd like to see.
