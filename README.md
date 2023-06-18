@@ -27,22 +27,25 @@ Clone the repository to your local machine and add the sourcing command:
   ```
 
 ## Usage
-To switch to a different version of Flutter, use the `fsm` command followed by the desired version:
+
+For Help
+
+```
+fsm --help
+```
+List all Flutter SDK versions
+
+```
+fsm --list
+```
+
+Switch to a different version of Flutter, use the `fsm` command followed by the desired version:
 
 ```
 fsm -switch <version>
-```
-For example, to switch to Flutter version 3.10.4, run:
-
-```
-fsm -switch "3.10.4"
+eg: fsm -switch "3.10.4"
 ```
 
-Available versions can be listed using the flutter_versions command:
-
-```
-flutter_versions
-```
 ## Contributing
 
 I welcome and appreciate contributions from the community! Whether you want to report a bug, request a new feature, or submit a pull request, please feel free to contribute to this project and help make it even better.
