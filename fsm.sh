@@ -9,8 +9,6 @@ flutterSwitchText='\e[1m\e[33m
  |_|   |_____/|_|  |_|
 \e[0m'
 
-# TODO 
-# 1. version show
 # 2. download sdk and unzip 
 
 # @desc : file sdk manager (management tool)
@@ -21,6 +19,8 @@ fsm() {
     versionList
   elif [[ $1 == "--help" ]]; then
     help
+  elif [[ $1 == "--now" ]]; then
+    fsmNow
   elif [[ $1 == "-switch" ]]; then
     if [ -n "$2" ]; then
       versionSwitch "$2"
@@ -97,6 +97,15 @@ versionList() {
 # @usage :  fsm --help
 help() {
     echo -e "$flutterSwitchText"
+    echo "--help : for fsm help"
+    echo "--now : current flutter version"
     echo "--list : for list all available versions"
     echo "-switch <version> : switch flutter sdk version"
+}
+
+# @desc: show current flutter version
+# @usage :  fsm --now
+fsmNow() {
+    echo -e "$flutterSwitchText"
+    flutter --version
 }

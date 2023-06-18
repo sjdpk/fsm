@@ -33,6 +33,12 @@ For Help
 ```
 fsm --help
 ```
+Current Flutter Version
+
+```
+fsm --now
+```
+
 List all Flutter SDK versions
 
 ```
