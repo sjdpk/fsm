@@ -110,7 +110,7 @@ help() {
   echo -e "$flutterSwitchText"
   echo "--help : for fsm help"
   echo "--version : current fsm version"
-  echo "--update : current fsm version"
+  echo "--update : update fsm"
   echo "--now : current flutter version"
   echo "--list : for list all available versions"
   echo "-switch <version> : switch flutter sdk version"
