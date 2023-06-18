@@ -64,11 +64,11 @@ versionSwitch(){
           break
       fi
       done
-    echo -e "$flutterSwitchText"
     if [ "$versionMatch" -eq 0 ]; then
       echo -e "\e[1m\e[31m Flutter version $newName is not available\e[0m"
       versionList
       else
+      echo -e "$flutterSwitchText"
       cd "$flutterDir"
       sudo mv "flutter" "$oldName"
       sudo mv "$newName" "flutter"
@@ -128,5 +128,6 @@ fsmNow() {
 fsmUpdate() {
   echo -e "$flutterSwitchText"
   rm -rf ~/.fsm
-  git clone https://github.com/sjdpk/fsm.git ~/.fsm  && source ~/.bashrc
+  git clone https://github.com/sjdpk/fsm.git ~/.fsm
+  echo "update shell eg: [ source ~/.zshrc, source ~/.bashrc, ...]" 
 }
