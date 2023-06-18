@@ -1,5 +1,6 @@
 #!/bin/bash
 
+version ='1.0.0'
 flutterSwitchText='\e[1m\e[33m
   ______ _____ __  __ 
  |  ____/ ____|  \/  |
@@ -19,6 +20,8 @@ fsm() {
     versionList
   elif [[ $1 == "--help" ]]; then
     help
+  elif [[ $1 == "--version" ]]; then
+    fsmVersion
   elif [[ $1 == "--now" ]]; then
     fsmNow
   elif [[ $1 == "-switch" ]]; then
@@ -28,6 +31,13 @@ fsm() {
   else
     help
   fi
+}
+
+# @desc: show current fsm version
+# @usage :  fsm --version
+fsmVersion() {
+  echo -e "$flutterSwitchText"
+  echo "fsm 1.0.0"
 }
 
 # @desc : version switch
@@ -98,6 +108,7 @@ versionList() {
 help() {
   echo -e "$flutterSwitchText"
   echo "--help : for fsm help"
+  echo "--version : current fsm version"
   echo "--now : current flutter version"
   echo "--list : for list all available versions"
   echo "-switch <version> : switch flutter sdk version"
