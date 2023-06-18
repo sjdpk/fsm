@@ -9,6 +9,9 @@ flutterSwitchText='\e[1m\e[33m
  |_|   |_____/|_|  |_|
 \e[0m'
 
+# TODO 
+# 1. version show
+# 2. download sdk and unzip 
 
 # @desc : file sdk manager (management tool)
 # @date : 2023-june-18
@@ -40,8 +43,7 @@ versionSwitch(){
     if [ "$oldName" = "$newName" ]; then
         echo -e "\e[1m\e[34m You are already using Flutter version $oldName\e[0m"
     else
-        # availableVersions=($(ls "$flutterDir" | grep -oP "(?<=flutter-).+"))
-
+        availableVersions=($(ls "$flutterDir" | grep -oP "(?<=flutter-).+"))
         versionMatch=0
         for version in "${availableVersions[@]}"; do
         if [ "$version" = "$newVersion" ]; then
