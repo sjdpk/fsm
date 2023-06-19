@@ -13,22 +13,15 @@ Flutter SDK folder must follow this pattern
 `flutter-<version>`
 eg:  ```flutter-3.10.4```
 
+### Basic Installation
 
-######  To Know your shell  
-    echo $SHELL
-### Installation To `bash` shell
+FSM is installed by running the following commands in your terminal, depending on your shell profile. 
+To Know your shell Profile run this command : `echo $SHELL`.
+| Shell    | Command                                                                                           |
+| :-------- | :------------------------------------------------------------------------------------------------ |
+| **bash**  | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc` |
+| **zsh**  | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc`   |
 
-Clone the repository to your local machine and add the sourcing command:
-```bash
-git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc
-```
-
-### Installation To `zsh` shell
-
-Clone the repository to your local machine and add the sourcing command:
-```bash
-git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc
-```
 
 ## Usage
 | Description  | Command  |
@@ -50,13 +43,13 @@ fsm -switch <version>
 eg: fsm -switch "3.10.4"
 ```
 
-###FAQ 
+**FAQ:**
 
-1. > fsm not found
-Add this line at the end of your shell (eg: bashrc/zshrc) file
-			 ...
-			...
-			source ~/.fsm/fsm.sh
+1. **fsm not found**
+   
+	Add this line at the end of your shell (eg: bashrc/zshrc) file.
+
+	`source ~/.fsm/fsm.sh`
 
 ## Contributors ✨
 
