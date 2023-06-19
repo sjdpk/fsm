@@ -1,9 +1,6 @@
-## fsm : Flutter SDK Manager
-[![Build sjdpk](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/sjdpk/fsm)
-
 >  ##fsm
 
-	Flutter SDK Manager : A Command-Line Interface (CLI) tool designed to simplify the management of different versions of the Flutter Software Development Kit (SDK) on your development environment. It provides optimization and convenience for developers who work with Flutter by allowing them to switch between different versions of the Flutter SDK seamlessly.
+Flutter SDK Manager : A Command-Line Interface (CLI) tool designed to simplify the management of different versions of the Flutter Software Development Kit (SDK) on your development environment. It provides optimization and convenience for developers who work with Flutter by allowing them to switch between different versions of the Flutter SDK seamlessly.
 **Features:**
 
 - Configure and use Flutter SDK version
