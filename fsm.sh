@@ -118,7 +118,7 @@ downloadFlutter(){
            sudo mv "flutter" "$oldName"
            unzip flutter_macos_$newVersion-stable.zip
            rm flutter_macos_"$newVersion"-stable.zip
-      elif [os == "Linux"]; then
+      elif [ "$os" == "Linux" ]; then
            curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$newVersion-stable.zip
            sudo mv "flutter" "$oldName"
            unzip flutter_linux_$newVersion-stable.zip
