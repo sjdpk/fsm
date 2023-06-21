@@ -22,15 +22,15 @@ fsm() {
     help
   elif [[ $1 == "--version" ]]; then
     fsmVersion
-  elif [[ $1 == "--update" ]]; then
+  elif [[ $1 == "update" ]]; then
     fsmUpdate
-  elif [[ $1 == "--now" ]]; then
+  elif [[ $1 == "now" ]]; then
     fsmNow
   elif [[ $1 == "--download" ]]; then
     if [ -n "$2" ]; then
       downloadFlutter "$2"
     fi
-  elif [[ $1 == "-switch" ]]; then
+  elif [[ $1 == "use" ]]; then
     if [ -n "$2" ]; then
       versionSwitch "$2"
     fi

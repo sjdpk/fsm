@@ -27,12 +27,12 @@ To Know your shell Profile run this command : `echo $SHELL`.
 | Description  | Command  |
 | ------------ | ------------ |
 | Help  | `fsm --help`  |
-| Flutter Version  | `fsm --now`  |
+| Flutter Version  | `fsm now`  |
 | fsm Version  | `fsm --version`  |
-|  fsm Version  | `fsm --update`  |
+|  fsm Version  | `fsm update`  |
 | List all Flutter SDK  | `fsm --list`  |
-| Switch Flutter Version  | `fsm -switch <version>` |
-| Switch Flutter Version Eg  | ` fsm -switch "3.10.4" `  |
+| Switch Flutter Version  | `fsm use <version>` |
+| Switch Flutter Version Eg  | ` fsm use "3.10.4" `  |
 
 
 
@@ -40,7 +40,7 @@ Switch to a different version of Flutter, use the `fsm` command followed by the 
 
 ```
 fsm -switch <version>
-eg: fsm -switch "3.10.4"
+eg: fsm use "3.10.4"
 ```
 
 **FAQ:**
