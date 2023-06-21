@@ -33,6 +33,8 @@ To Know your shell Profile run this command : `echo $SHELL`.
 | List all Flutter SDK  | `fsm --list`  |
 | Switch Flutter Version  | `fsm use <version>` |
 | Switch Flutter Version Eg  | ` fsm use "3.10.4" `  |
+| Download Flutter Version  | `fsm download <version>` |
+| Download Flutter Version Eg  | ` fsm download "3.10.5" `  |
 
 
 
