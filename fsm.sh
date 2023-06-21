@@ -108,20 +108,21 @@ downloadFlutter(){
       fi
       done
     if [ "$versionMatch" -eq 0 ]; then
-      #TODO: Download Logic
-      echo -e "\e[1m\e[31m Flutter version $newVersion will soon be available for download.\e[0m"
       echo -e "$flutterSwitchText"
+      echo -e "\e[1m\e[34m Flutter version $newVersion will soon be available for download.\e[0m"
       cd "$flutterDir"
       os=$(uname -s)
       if [ "$os" = "Darwin" ]; then
-           echo -e "\e[1m\e[31m Flutter version $newName is Download Started\e[0m"
+           echo -e "\e[1m\e[34m Flutter version $newName is Download Started\e[0m"
            curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_$newVersion-stable.zip
            sudo mv "flutter" "$oldName"
            unzip flutter_macos_$newVersion-stable.zip
+           rm flutter_macos_"$newVersion"-stable.zip
       elif [os == "Linux"]; then
            curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$newVersion-stable.zip
            sudo mv "flutter" "$oldName"
            unzip flutter_linux_$newVersion-stable.zip
+           rm flutter_macos_"$newVersion"-stable.zip
       fi
       echo -ne "\e[1m\e[34m Switching Progress: \e[0m"
       for ((i=1; i<=10; i++)); do
