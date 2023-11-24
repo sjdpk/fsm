@@ -106,6 +106,64 @@ flutterSDKVersionSwitch(){
     cd "$currentDir"
 }
 
+# flutter specific verison download
+downloadFlutterVersion(){
+    flutterVersionToDownload="$1"
+    currentDir=$(pwd) # store current directory
+    declare -a availableFlutterVersionsList
+    flutterDir=$(dirname $(dirname $(dirname $(which flutter))))
+    for dir in "$flutterDir"/flutter*/; do
+        if [ -d "$dir" ]; then
+            cd "$dir" || exit
+            flutter_version=$("${dir}bin/flutter" --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -n 1)
+            flutterVersions+=("$flutter_version") # Append the version to the array
+        fi
+    done
+
+    # Check if the array contains a specific version
+    if [[ " ${flutterVersions[@]} " =~ " $flutterVersionToDownload " ]]; then
+        echo -e "$greenBold Flutter version $flutterVersionToDownload is already in your system$exitColor"
+        echo
+    else
+        # download flutter
+        osName=$(uname -s) # get the os name
+        if [ "$osName" = "Linux" ]; then
+            #    curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$newVersion-stable.zip
+            #    sudo mv "flutter" "$oldName"
+            #    unzip flutter_linux_$newVersion-stable.zip
+            echo "download for Linux"
+            if command -v curl &> /dev/null; then
+                cd ~/Downloads   
+                curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$flutterVersionToDownload-stable.tar.xz
+                echo -e "🎊 🎊$greenBold Download Complete 🎊 🎊$exitColor"
+                echo
+                echo -e "👨‍🎤👨‍🎤 $greenBold Extraction is in progress ... 🎊 🎊 $exitColor"
+                if command -v tar &> /dev/null; then
+                    tar -xJf flutter_linux_$flutterVersionToDownload-stable.tar.xz 
+                    mv flutter "flutter-$flutterVersionToDownload"
+                    echo -e "🧑‍💻🧑‍💻 $yellowBold Setting up new version... 🎊 🎊 $exitColor"
+                    rm -r flutter_linux_$flutterVersionToDownload-stable.tar.xz
+                    sudo mv "flutter-$flutterVersionToDownload" $flutterDir
+                    echo
+                    echo -e "$yellowBold fsm use $flutterVersionToDownload $exitCode"
+                    echo
+                else
+                    echo 
+                    echo -e "$redBold Error : tar in't installed in you system $exitColor"
+                    echo
+                fi
+            else
+                echo 
+                echo -e "$redBold Error : curl in't installed in you system $exitColor"
+                echo
+            fi
+        else
+            echo "Currently FSM Support Linux Only"
+        fi
+    fi
+    cd "$currentDir"
+}
+
 # help function
 displayHelp() {
     echo
@@ -140,6 +198,13 @@ in
             flutterSDKVersionSwitch "$version_to_use"
         else
             echo -e "$redBold Please provide a version number after 'use' option.$exitColor"
+        fi
+        ;;
+    install) version_to_install=$2
+        if [ -n "$version_to_install" ]; then
+            downloadFlutterVersion "$version_to_install"
+        else
+            echo -e "$redBold Please provide a version number after 'install' option.$exitColor"
         fi
         ;;
     help|*) displayHelp
