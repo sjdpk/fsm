@@ -136,7 +136,6 @@ downloadFlutterVersion(){
                 cd ~/Downloads   
                 curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$flutterVersionToDownload-stable.tar.xz
                 echo -e "🎊 🎊$greenBold Download Complete 🎊 🎊$exitColor"
-                echo
                 echo -e "👨‍🎤👨‍🎤 $greenBold Extraction is in progress ... 🎊 🎊 $exitColor"
                 if command -v tar &> /dev/null; then
                     tar -xJf flutter_linux_$flutterVersionToDownload-stable.tar.xz 
