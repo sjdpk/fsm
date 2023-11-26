@@ -13,36 +13,46 @@ Flutter SDK folder must follow this pattern
 `flutter-<version>`
 eg:  ```flutter-3.10.4```
 
-### Basic Installation
+### FSM Installation
 
-FSM is installed by running the following commands in your terminal, depending on your shell profile. 
-To Know your shell Profile run this command : `echo $SHELL`.
-| Shell    | Command                                                                                           |
-| :-------- | :------------------------------------------------------------------------------------------------ |
-| **bash**  | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc` |
-| **zsh**  | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'source ~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc`   |
+To install FSM, use the following commands based on your shell environment:
+
+## Installation Instructions
+
+| **Shell**     | **Command**                                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Bash**       | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc`        |
+| **Zsh**        | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc`          |
+| **Fish**       | ```fish git clone https://github.com/sjdpk/fsm.git ~/.fsm echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.config/fish/config.fish source ~/.config/fish/config.fish``` |
+| **PowerShell** | ```powershell git clone https://github.com/sjdpk/fsm.git $HOME/.fsm Add-Content $PROFILE.CurrentUserAllHosts "`nfunction fsm { $HOME/.fsm/fsm.ps1 }"``` |
+| **Others**     | 1. Clone the repository: `git clone https://github.com/sjdpk/fsm.git ~/.fsm`<br> 2. Export path in your shell configuration file. Example:<br> - Bash/Zsh: `alias fsm=~/.fsm/fsm.sh`<br> - Fish: `alias fsm=~/.fsm/fsm.sh`<br> - PowerShell: `function fsm { $HOME/.fsm/fsm.ps1 }`<br> 3. Restart your shell or run appropriate commands to apply changes. |
+
+Ensure to restart your shell or run the appropriate commands to apply the changes.
 
 
 ## Usage
-| Description  | Command  |
-| ------------ | ------------ |
-| Help  | `fsm --help`  |
-| Flutter Version  | `fsm now`  |
-| fsm Version  | `fsm --version`  |
-|  fsm Version  | `fsm update`  |
-| List all Flutter SDK  | `fsm --list`  |
-| Switch Flutter Version  | `fsm use <version>` |
-| Switch Flutter Version Eg  | ` fsm use "3.10.4" `  |
-| Download Flutter Version  | `fsm download <version>` |
-| Download Flutter Version Eg  | ` fsm download "3.10.5" `  |
+Usage : `fsm [OPTIONS]`
 
+
+| Description                 | Command                  |
+| --------------------------- | ------------------------ |
+| Help                        | `fsm help`               |
+| Display Flutter Version     | `fsm -v`                 |
+| Display Flutter Version (alternative) | `flutter --version` |
+| Display FSM Info             | `fsm info`               |
+| Update FSM Version           | `fsm update`             |
+| List all Flutter SDK         | `fsm ls` or `fsm --list` |
+| Switch Flutter Version       | `fsm use <version>`      |
+| Switch Flutter Version Example | `fsm use "3.10.4"`       |
+| Install Flutter Version     | `fsm install <version>` |
+| Install Flutter Version Example | `fsm install "3.10.5"` |
 
 
 Switch to a different version of Flutter, use the `fsm` command followed by the desired version:
 
 ```
-fsm -switch <version>
-eg: fsm use "3.10.4"
+fsm use <version>
+eg: fsm use 3.10.4
 ```
 
 **FAQ:**
@@ -51,7 +61,7 @@ eg: fsm use "3.10.4"
    
 	Add this line at the end of your shell (eg: bashrc/zshrc) file.
 
-	`source ~/.fsm/fsm.sh`
+	`alias fsm=~/.fsm/fsm.sh`
 
 ## Contributors ✨
 
