@@ -152,12 +152,38 @@ downloadFlutterVersion(){
                     echo
                 fi
             else
-                echo 
                 echo -e "$redBold Error : curl in't installed in you system $exitColor"
                 echo
             fi
+        elif  [ "$osName" = "Darwin" ]; then
+            echo "Downloading For macos"
+            if command -v curl &> /dev/null; then
+                cd ~/Downloads   
+                curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_$flutterVersionToDownload-stable.zip
+                echo -e "🎊 🎊$greenBold Download Complete 🎊 🎊$exitColor"
+                echo -e "👨‍🎤👨‍🎤 $greenBold Extraction is in progress ... 🎊 🎊 $exitColor"
+                if command -v unzip &> /dev/null; then
+                    unzip flutter_macos_$flutterVersionToDownload-stable.zip 
+                    mv flutter "flutter-$flutterVersionToDownload"
+                    echo -e "🧑‍💻🧑‍💻 $yellowBold Setting up new version... 🎊 🎊 $exitColor"
+                    rm -r flutter_macos_$flutterVersionToDownload-stable.zip
+                    sudo mv "flutter-$flutterVersionToDownload" $flutterDir
+                    echo
+                    echo -e "$yellowBold fsm use $flutterVersionToDownload $exitCode"
+                    echo
+                else
+                    echo 
+                    echo -e "$redBold Error : unzip in't installed in you system $exitColor"
+                    echo
+                fi
+            else
+                echo -e "$redBold Error : curl in't installed in you system $exitColor"
+                echo
+            fi
+        fi
+
         else
-            echo "Currently FSM Support Linux Only"
+            echo "Currently FSM Not Support For $osName"
         fi
     fi
     cd "$currentDir"
