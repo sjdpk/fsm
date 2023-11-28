@@ -46,6 +46,10 @@ Usage : `fsm [OPTIONS]`
 | Switch Flutter Version Example | `fsm use "3.10.4"`       |
 | Install Flutter Version     | `fsm install <version>` |
 | Install Flutter Version Example | `fsm install "3.10.5"` |
+| Create Flutter Project | `fsm create <appName>` |
+| Create Flutter Project Example | `fsm create awesomeProject` |
+| Create Feature Folder | `fsm feature <featureName>` |
+| Create Flutter Project Example | `fsm feature authentication` |
 
 
 Switch to a different version of Flutter, use the `fsm` command followed by the desired version:

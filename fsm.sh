@@ -87,7 +87,7 @@ flutterSDKVersionSwitch(){
             cd "$flutterDir"
             sudo mv "flutter" "flutter-$inUseFlutterVersion"
             sudo mv "$newFlutterName" "flutter"
-            echo -ne " 🫴 $greenBold Switching Progress: $exitColor"
+            echo -ne " 👉 $greenBold Switching Progress: $exitColor"
             for ((i=1; i<=10; i++)); do
                 echo -e -n "$greenBold=$exitColor"
                 sleep 0.1
@@ -177,13 +177,116 @@ displayHelp() {
     echo -e "   update           Update the FSM version"
     echo -e "   use <version>    Switch to a specific Flutter version"
     echo -e "   help             Display this help information"
+    echo -e "   create <project-name>   Create a new flutter project"
+    echo -e "   feature <feature-name>  Create a new feature folder structure"
     echo -e "\n Examples:"
     echo -e "   fsm -v"
     echo -e "   fsm ls"
     echo -e "   fsm info"
     echo -e "   fsm update"
     echo -e "   fsm use 3.3.3"
+    echo -e "   fsm create my_app"
+    echo -e "   fsm feature auth"
 }
+
+# feature folder creation
+createFeatureFoldersStr() {
+    local featureName="$1"
+
+    if [ -d "$featureName" ]; then
+        echo
+        echo -e "$redBold Error: Feature '$featureName' already exists. Please choose a different name. $exitColor"
+        echo
+        exit 1
+    fi
+
+    mkdir -p "$featureName/data/datasource/local"
+    touch "$featureName/data/datasource/local/.gitkeep"
+    mkdir -p "$featureName/data/datasource/remote"
+    touch "$featureName/data/datasource/remote/.gitkeep"
+    mkdir -p "$featureName/data/models"
+    touch "$featureName/data/models/.gitkeep"
+    mkdir -p "$featureName/data/repository"
+    touch "$featureName/data/repository/.gitkeep"
+
+    mkdir -p "$featureName/domain/entity"
+    touch "$featureName/domain/entity/.gitkeep"
+    mkdir -p "$featureName/domain/repository"
+    touch "$featureName/domain/repository/.gitkeep"
+    mkdir -p "$featureName/domain/usecase"
+    touch "$featureName/domain/usecase/.gitkeep"
+
+    mkdir -p "$featureName/presentation/bloc"
+    touch "$featureName/presentation/bloc/.gitkeep"
+    mkdir -p "$featureName/presentation/screen"
+    touch "$featureName/presentation/screen/.gitkeep"
+    mkdir -p "$featureName/presentation/widget"
+    touch "$featureName/presentation/widget/.gitkeep"
+    
+    echo
+    echo -e "$greenBold 👉 Folder structure created successfully for feature: $featureName 👏 $exitColor"
+    echo
+}
+
+# create flutter project
+appendToFile() {
+    local content=$1
+    local file_path=$2
+    echo "$content" >> "$file_path"
+}
+createFlutterProject() {
+    local applicationName=$1
+    echo 
+    read -p "Enter the App ID (default:, com.example): " appId
+    read -p "Is your app support firebase ? [y/N] : " firebaseStatus
+    read -p "Is your app support localdb ? [y/N] : " localDBStatus
+    read -p "Is your app support localizations? [y/N] : " localizationsStatus
+    read -p "Is your app support Multiple Env (Eg., local,dev,prod)? [y/N] : " envStatus
+
+    if [ -n "$appId" ]; then
+        flutter create --org "$appId" "$applicationName"
+    else
+        flutter create "$applicationName"
+    fi
+
+    # Go to the lib folder of the newly created project and create the src folder
+    cd $applicationName/lib
+    # Create the main project structure
+    mkdir -p src/{config/{api,router,themes},core/{extensions,network,resources,services,utils,widgets}}
+    mkdir -p src/core/services/validator
+
+    # Create files in the config folder
+    touch src/config/api/api_collection.dart
+    if [ "$envStatus" = "y" ]; then
+        mkdir src/config/env
+        touch src/config/env/{base_env.dart,dev_env.dart,env.dart,local_env.dart,prod_env.dart}
+    fi
+
+    if [ "$localizationsStatus" = "y" ]; then
+        mkdir src/config/localization
+        touch src/config/localization/{intl_en.arb,intl_ne.arb,l10n.dart,localization.dart}
+    fi
+    touch src/config/router/{app_routes.dart,custom_transition.dart}
+    touch src/config/themes/app_theme.dart
+
+    # Create files in the core folder
+    touch src/core/extensions/{string_extension.dart,widget_extensions.dart}
+    touch src/core/network/data_state.dart
+    touch src/core/resources/{colors.dart,constants.dart,images.dart}
+    if [ "$firebaseStatus" = "y" ]; then
+        mkdir src/core/services/firebase
+        touch src/core/services/firebase/{firebase_crashlogger.dart,firebase.dart,firebase_notification.dart,firebase_services.dart,local_notification.dart}
+    fi
+    if [ "$localDBStatus" = "y" ]; then
+        mkdir src/core/services/localdb
+        touch src/core/services/localdb/{db.dart,db_service.dart,db_utils.dart}
+    fi
+    touch src/core/services/validator/validator.dart
+    touch src/core/utils/{common.dart}
+    touch src/core/widgets/{app_dialog.dart,asynctext.dart,backbutton.dart,button.dart,dropdown_search.dart,images.dart,language_switchbtn.dart,loading.dart,marquee.dart,modal_sheet.dart,readmoretext.dart,shimmer_widget.dart,skipbtn.dart,snackbar.dart,text.dart,textformfield.dart,transparent_appbar.dart}
+    echo -3 "$greenBold 👉 Flutter project created successfully 👏 $exitColor"
+}
+
 
 opt=$1
 case $opt
@@ -204,6 +307,22 @@ in
             downloadFlutterVersion "$version_to_install"
         else
             echo -e "$redBold Please provide a version number after 'install' option.$exitColor"
+        fi
+        ;;
+
+    create) applicationName=$2 
+        if [ -n "$applicationName" ]; then
+            createFlutterProject "$applicationName"
+        else
+            echo -e "$redBold Please provide a application name after 'create' option.$exitColor"
+        fi
+        ;;
+    
+    feature) featureToCreate=$2
+        if [ -n "$featureToCreate" ]; then
+            createFeatureFoldersStr "$featureToCreate"
+        else
+            echo -e "$redBold Please provide a Feature Name after 'feature' option.$exitColor"
         fi
         ;;
     help|*) displayHelp
