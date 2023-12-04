@@ -5,7 +5,7 @@ blueBold="\e[1;34m"
 yellowBold='\e[1m\e[33m'
 redBold='\e[1m\e[31m'
 greenBold='\e[32m\e[1m'
-exitColor='\e[0m'
+exitColor='\e[0m\n'
 flutterSwitchText='\e[1m\e[33m
   ______ _____ __  __ 
  |  ____/ ____|  \/  |
@@ -13,15 +13,15 @@ flutterSwitchText='\e[1m\e[33m
  |  __| \___ \| |\/| |
  | |    ____) | |  | |
  |_|   |_____/|_|  |_|
-\e[0m'
+\e[0m\n'
 
 # curret fsm version
 fsmInformation() {
     developer="Deepak Sapkota"
     # ANSI escape codes for blue and bold text
-    echo -e "$flutterSwitchText"
-    echo -e "Current Version : \e[1m$version\e[0m"  # Bold version text
-    echo -e "Developer : $blue_bold$developer\e[0m"  # Blue and bold developer text
+    printf "$flutterSwitchText"
+    printf "Current Version : \e[1m$version$exitColor"  # Bold version text
+    printf "Developer : $blueBold$developer$exitColor"  # Blue and bold developer text
     echo "Repo : https://github.com/sjdpk/fsm"
     echo ""
 }
@@ -29,15 +29,15 @@ fsmInformation() {
 
 fsmNotes() {
     developer=" Deepak Sapkota"
-    echo -e " Current Version : \e[1m$version\e[0m"  # Bold version text
-    echo -e " Developer : $blueBold$developer\e[0m"  # Blue and bold developer text
+    printf " Current Version : \e[1m$version$exitColor"  # Bold version text
+    printf " Developer : $blueBold$developer$exitColor"  # Blue and bold developer text
     echo " Repo : https://github.com/sjdpk/fsm"
     echo 
 }
 
 # update fsm
 updateFSMVersion() {
-  echo -e "$flutterSwitchText"
+  printf "$flutterSwitchText"
   rm -rf ~/.fsm
   git clone https://github.com/sjdpk/fsm.git ~/.fsm
   echo "update shell eg: [ source ~/.zshrc, source ~/.bashrc, ...]" 
@@ -56,7 +56,7 @@ locallyInstalledFlutterVersionsList(){
         if [ -d "$dir" ]; then
             cd "$dir" || exit
             flutter_version=$("${dir}bin/flutter" --version | grep -oE "Flutter [0-9]+\.[0-9]+\.[0-9]+")
-            echo -e " 👉  $blue_bold$flutter_version\e[0m"
+            printf " 👉  $blue_bold$flutter_version\e[0m"
         fi
     done
 }
@@ -71,7 +71,7 @@ flutterSDKVersionSwitch(){
     inUseFlutterVersion=$(flutter --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -n 1)
 
     if [ "$newFlutterVersion" = "$inUseFlutterVersion" ]; then
-        echo -e "$redBold You are already using Flutter version $inUseFlutterVersion $exitColor"
+        printf "$redBold You are already using Flutter version $inUseFlutterVersion $exitColor"
     else 
         declare -a availableFlutterVersionsList
         flutterDir=$(dirname $(dirname $(dirname $(which flutter))))
@@ -89,17 +89,17 @@ flutterSDKVersionSwitch(){
             sudo mv "$newFlutterName" "flutter"
             echo -ne " 👉 $greenBold Switching Progress: $exitColor"
             for ((i=1; i<=10; i++)); do
-                echo -e -n "$greenBold=$exitColor"
+                printf -n "$greenBold=$exitColor"
                 sleep 0.1
             done
-            echo -e " $greenBold100%$exitColor"
+            printf " $greenBold 100%$exitColor"
             echo
-            echo -e "🎊 🎊$greenBold Switched Flutter from Flutter $inUseFlutterVersion to Flutter $newFlutterVersion $exitColor🎊 🎊"
+            printf "🎊 🎊$greenBold Switched Flutter from Flutter $inUseFlutterVersion to Flutter $newFlutterVersion 🎊 🎊$exitColor"
             echo
         else
-            echo -e "$redBold Flutter version $newFlutterVersion is not available\e[0m"
+            printf "$redBold Flutter version $newFlutterVersion is not available$exitColor"
             yellow_bold="\e[1m\e[33m"
-            echo -e "$yellowBold Available versions: $exitColor"
+            printf "$yellowBold Available versions: $exitColor"
             locallyInstalledFlutterVersionsList # list all available versions
         fi
     fi 
@@ -122,7 +122,7 @@ downloadFlutterVersion(){
 
     # Check if the array contains a specific version
     if [[ " ${flutterVersions[@]} " =~ " $flutterVersionToDownload " ]]; then
-        echo -e "$greenBold Flutter version $flutterVersionToDownload is already in your system$exitColor"
+        printf "$greenBold Flutter version $flutterVersionToDownload is already in your system$exitColor"
         echo
     else
         # download flutter
@@ -135,25 +135,25 @@ downloadFlutterVersion(){
             if command -v curl &> /dev/null; then
                 cd ~/Downloads   
                 curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_$flutterVersionToDownload-stable.tar.xz
-                echo -e "🎊 🎊$greenBold Download Complete 🎊 🎊$exitColor"
-                echo -e "👨‍🎤👨‍🎤 $greenBold Extraction is in progress ... 🎊 🎊 $exitColor"
+                printf "🎊 🎊$greenBold Download Complete 🎊 🎊$exitColor"
+                printf "👨‍🎤👨‍🎤 $greenBold Extraction is in progress ... 🎊 🎊 $exitColor"
                 if command -v tar &> /dev/null; then
                     tar -xJf flutter_linux_$flutterVersionToDownload-stable.tar.xz 
                     mv flutter "flutter-$flutterVersionToDownload"
-                    echo -e "🧑‍💻🧑‍💻 $yellowBold Setting up new version... 🎊 🎊 $exitColor"
+                    printf "🧑‍💻🧑‍💻 $yellowBold Setting up new version... 🎊 🎊 $exitColor"
                     rm -r flutter_linux_$flutterVersionToDownload-stable.tar.xz
                     sudo mv "flutter-$flutterVersionToDownload" $flutterDir
                     echo
-                    echo -e "$yellowBold fsm use $flutterVersionToDownload $exitCode"
+                    printf "$yellowBold fsm use $flutterVersionToDownload $exitColor"
                     echo
                 else
                     echo 
-                    echo -e "$redBold Error : tar in't installed in you system $exitColor"
+                    printf "$redBold Error : tar in't installed in you system $exitColor"
                     echo
                 fi
             else
                 echo 
-                echo -e "$redBold Error : curl in't installed in you system $exitColor"
+                printf "$redBold Error : curl in't installed in you system $exitColor"
                 echo
             fi
         else
@@ -168,25 +168,25 @@ displayHelp() {
     echo
     fsmNotes
     echo
-    echo -e "$yellowBold Useful FSM commands $exitColor"
-    echo -e " Usage: fsm [OPTIONS]"
-    echo -e "\n Options:"
-    echo -e "   -v, --version    Display the version of the flutter"
-    echo -e "   ls, --list       List locally installed Flutter versions"
-    echo -e "   info             Display information about the current script version"
-    echo -e "   update           Update the FSM version"
-    echo -e "   use <version>    Switch to a specific Flutter version"
-    echo -e "   help             Display this help information"
-    echo -e "   create <project-name>   Create a new flutter project"
-    echo -e "   feature <feature-name>  Create a new feature folder structure"
-    echo -e "\n Examples:"
-    echo -e "   fsm -v"
-    echo -e "   fsm ls"
-    echo -e "   fsm info"
-    echo -e "   fsm update"
-    echo -e "   fsm use 3.3.3"
-    echo -e "   fsm create my_app"
-    echo -e "   fsm feature auth"
+    printf "$yellowBold Useful FSM commands $exitColor"
+    printf "\n Usage: fsm [OPTIONS]"
+    printf "\n\n Options:"
+    printf "\n   -v, --version    Display the version of the flutter"
+    printf "\n   ls, --list       List locally installed Flutter versions"
+    printf "\n   info             Display information about the current script version"
+    printf "\n   update           Update the FSM version"
+    printf "\n   use <version>    Switch to a specific Flutter version"
+    printf "\n   help             Display this help information"
+    printf "\n   create <project-name>   Create a new flutter project"
+    printf "\n   feature <feature-name>  Create a new feature folder structure"
+    printf "\n\n Examples:"
+    printf "\n   fsm -v"
+    printf "\n   fsm ls"
+    printf "\n   fsm info"
+    printf "\n   fsm update"
+    printf "\n   fsm use 3.3.3"
+    printf "\n   fsm create my_app"
+    printf "\n   fsm feature auth"
 }
 
 # feature folder creation
@@ -195,7 +195,7 @@ createFeatureFoldersStr() {
 
     if [ -d "$featureName" ]; then
         echo
-        echo -e "$redBold Error: Feature '$featureName' already exists. Please choose a different name. $exitColor"
+        printf "$redBold Error: Feature '$featureName' already exists. Please choose a different name. $exitColor"
         echo
         exit 1
     fi
@@ -224,7 +224,7 @@ createFeatureFoldersStr() {
     touch "$featureName/presentation/widget/.gitkeep"
     
     echo
-    echo -e "$greenBold 👉 Folder structure created successfully for feature: $featureName 👏 $exitColor"
+    printf "$greenBold 👉 Folder structure created successfully for feature: $featureName 👏 $exitColor"
     echo
 }
 
@@ -299,14 +299,14 @@ in
         if [ -n "$version_to_use" ]; then
             flutterSDKVersionSwitch "$version_to_use"
         else
-            echo -e "$redBold Please provide a version number after 'use' option.$exitColor"
+            printf "$redBold Please provide a version number after 'use' option.$exitColor"
         fi
         ;;
     install) version_to_install=$2
         if [ -n "$version_to_install" ]; then
             downloadFlutterVersion "$version_to_install"
         else
-            echo -e "$redBold Please provide a version number after 'install' option.$exitColor"
+            printf "$redBold Please provide a version number after 'install' option.$exitColor"
         fi
         ;;
 
@@ -314,7 +314,7 @@ in
         if [ -n "$applicationName" ]; then
             createFlutterProject "$applicationName"
         else
-            echo -e "$redBold Please provide a application name after 'create' option.$exitColor"
+            printf "$redBold Please provide a application name after 'create' option.$exitColor"
         fi
         ;;
     
@@ -322,7 +322,7 @@ in
         if [ -n "$featureToCreate" ]; then
             createFeatureFoldersStr "$featureToCreate"
         else
-            echo -e "$redBold Please provide a Feature Name after 'feature' option.$exitColor"
+            printf "$redBold Please provide a Feature Name after 'feature' option.$exitColor"
         fi
         ;;
     help|*) displayHelp
