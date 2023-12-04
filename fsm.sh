@@ -56,7 +56,7 @@ locallyInstalledFlutterVersionsList(){
         if [ -d "$dir" ]; then
             cd "$dir" || exit
             flutter_version=$("${dir}bin/flutter" --version | grep -oE "Flutter [0-9]+\.[0-9]+\.[0-9]+")
-            printf " 👉  $blue_bold$flutter_version\e[0m"
+            printf " 👉  $blue_bold$flutter_version$exitColor"
         fi
     done
 }
