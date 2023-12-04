@@ -21,7 +21,7 @@ fsmInformation() {
     # ANSI escape codes for blue and bold text
     printf "$flutterSwitchText"
     printf "Current Version : \e[1m$version$exitColor"  # Bold version text
-    printf "Developer : $blueBold$developer$exitColor"  # Blue and bold developer text
+    printf "Developer : $blue_bold$developer$exitColor"  # Blue and bold developer text
     echo "Repo : https://github.com/sjdpk/fsm"
     echo ""
 }
