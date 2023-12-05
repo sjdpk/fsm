@@ -87,18 +87,17 @@ flutterSDKVersionSwitch(){
             cd "$flutterDir"
             sudo mv "flutter" "flutter-$inUseFlutterVersion"
             sudo mv "$newFlutterName" "flutter"
-            echo -ne " 👉 $greenBold Switching Progress: $exitColor"
+            echo -ne " 👉 $greenBold Switching Progress: \e[0m"
             for ((i=1; i<=10; i++)); do
-                printf -n "$greenBold=$exitColor"
+                printf "$greenBold=\e[0m"
                 sleep 0.1
             done
-            printf " $greenBold 100%$exitColor"
+            printf "$greenBold Done 👈$exitColor"
             echo
             printf "🎊 🎊$greenBold Switched Flutter from Flutter $inUseFlutterVersion to Flutter $newFlutterVersion 🎊 🎊$exitColor"
             echo
         else
             printf "$redBold Flutter version $newFlutterVersion is not available$exitColor"
-            yellow_bold="\e[1m\e[33m"
             printf "$yellowBold Available versions: $exitColor"
             locallyInstalledFlutterVersionsList # list all available versions
         fi
