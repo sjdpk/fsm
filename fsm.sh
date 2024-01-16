@@ -241,6 +241,10 @@ createFlutterProject() {
     read -p "Is your app support localdb ? [y/N] : " localDBStatus
     read -p "Is your app support localizations? [y/N] : " localizationsStatus
     read -p "Is your app support Multiple Env (Eg., local,dev,prod)? [y/N] : " envStatus
+    read -p "Is your app support go_router ? [y/N] : " routerStatus
+    read -p "Is your app support state Management ? [y/N] : " stateMngtStatus
+    read -p "Is your app support Network Call (default: http) ? [y/N] : " networkCallStatus
+
 
     if [ -n "$appId" ]; then
         flutter create --org "$appId" "$applicationName"
@@ -265,7 +269,6 @@ createFlutterProject() {
         mkdir src/config/localization
         touch src/config/localization/{intl_en.arb,intl_ne.arb,l10n.dart,localization.dart}
     fi
-    touch src/config/router/{app_routes.dart,custom_transition.dart}
     touch src/config/themes/app_theme.dart
 
     # Create files in the core folder
@@ -273,12 +276,31 @@ createFlutterProject() {
     touch src/core/network/data_state.dart
     touch src/core/resources/{colors.dart,constants.dart,images.dart}
     if [ "$firebaseStatus" = "y" ]; then
+        echo "By default firebase support : firebase_messaging firebase_analytics firebase_crashlytics"
         mkdir src/core/services/firebase
+        flutter pub add firebase_core firebase_messaging firebase_analytics firebase_crashlytics
         touch src/core/services/firebase/{firebase_crashlogger.dart,firebase.dart,firebase_notification.dart,firebase_services.dart,local_notification.dart}
     fi
     if [ "$localDBStatus" = "y" ]; then
+        read -p "Is your app support Relational DB ? [y/N] : " isRelationalDB
+        if [ "$isRelationalDB" = "y" ]; then
+            flutter pub add sqflite
+        else
+            flutter pub add hive hive_flutter
+            flutter pub add -d build_runner hive_generator
+        fi
         mkdir src/core/services/localdb
         touch src/core/services/localdb/{db.dart,db_service.dart,db_utils.dart}
+    fi
+    if [ "$routerStatus" = "y" ]; then
+        flutter pub add go_router
+        touch src/config/router/{app_routes.dart,custom_transition.dart}
+    fi
+    if [ "$stateMngtStatus" = "y" ]; then
+        flutter pub add bloc flutter_bloc equatable
+    fi
+    if [ "$networkCallStatus" = "y" ]; then
+        flutter pub add http
     fi
     touch src/core/services/validator/validator.dart
     touch src/core/utils/{common.dart}
