@@ -66,6 +66,8 @@ Usage: `fsm [OPTIONS]`
 | Switch Flutter Version Example             | `fsm use "3.10.4"`           |
 | Install a Specific Flutter SDK Version     | `fsm install <version>`      |
 | Install Flutter Version Example            | `fsm install "3.10.5"`       |
+| Remove a Specific Flutter SDK Version      | `fsm remove <version>`      |
+| Remove Flutter Version Example             | `fsm remove "3.10.5"`       |
 | Create a New Flutter Project               | `fsm create <name>`          |
 | Create Flutter Project Example             | `fsm create awesomeProject`  |
 | Create a New Feature Folder                | `fsm feature <name>`         |

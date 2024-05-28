@@ -96,6 +96,33 @@ downloadFlutterVersion() {
     printf "%bHINT: Please switch version%b\n" "$YELLOW" "$NC"
 }
 
+# @desc : remove flutter version
+# @param : $1 - version_to_remove
+# @return : remove flutter version
+# @example : removeFlutterVersion "stable"
+removeFlutterVersion() {
+    version_to_remove=$1
+    flutter_root=$(cd "$(dirname "$(which flutter)")/.." && pwd)
+    check=$(git -C "$flutter_root" branch | grep "$branch_to_check")
+
+    # not case
+    if [ -z "$check" ]; then
+        logError "Flutter version $version_to_remove is not present in your local system."
+        exit 1
+    else
+        current_branch=$(git -C "$flutter_root" branch --show-current)
+        if [ "$current_branch" == "$version_to_remove" ]; then
+            logError "You are currently using this version. Please switch to another version."
+            exit 1
+        fi
+        printf "%bRemoving flutter version %s %b\n" "$GREEN" "$version_to_remove" "$NC"
+        git -C "$flutter_root" checkout stable >/dev/null 2>&1
+        git -C "$flutter_root" branch -D "$version_to_remove" >/dev/null 2>&1
+        printf "%b%s%b\n" "$GREEN" "Flutter $version_to_remove removed successfully" "$NC"
+
+    fi
+}
+
 # @desc : upgrade flutter sdk
 # @return : upgrade flutter sdk
 # @example : upgradeFlutterSDK

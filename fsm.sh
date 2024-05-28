@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Source function files
-# source 'src/constants.sh'
 # Define the base directory
 BASE_DIR=$(dirname "$0")
 
@@ -63,6 +62,14 @@ install)
         downloadFlutterVersion "$version_to_install"
     else
         logError "Please provide a version number after 'install' option."
+    fi
+    ;;
+remove)
+    version_to_remove=$2
+    if [ -n "$version_to_remove" ]; then
+        removeFlutterVersion "$version_to_remove"
+    else
+        logError "Please provide a version number after 'remove' option."
     fi
     ;;
 upgradeFlutterSDK) upgradeFlutterSDK ;;

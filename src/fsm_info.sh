@@ -37,6 +37,7 @@ fsmHelp() {
     echo "  flutter-upgrade     Upgrade Flutter to latest SDK"
     echo "  use <version>       Switch to a specific Flutter SDK version"
     echo "  install <version>   Install a specific Flutter SDK version"
+    echo "  remove <version>    Remove a specific Flutter SDK version"
     echo "  create <name>       Create a new Flutter project"
     echo "  feature <name>      Create a new feature folder"
     echo "  help                Display this help message"
