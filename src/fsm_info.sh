@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Source function files
-source 'src/constants.sh'
+if [ -f "$BASE_DIR/src/constants.sh" ]; then
+    source "$BASE_DIR/src/constants.sh"
+else
+    echo "Error: src/constants.sh not found."
+    exit 1
+fi
 
 # @desc : Display fsm version information
 # @return : void
@@ -20,7 +25,7 @@ fsmInformation() {
 # @return : void
 # @example : fsmHelp
 
-fsmHelp(){
+fsmHelp() {
     printf "%b%s :%b %s\n" "$YELLOW" "$PACKAGE_NAME" "$NC" "$DESC"
     echo ""
     echo "Usage: fsm [options]"

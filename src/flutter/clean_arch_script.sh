@@ -1,8 +1,13 @@
 #!/bin/bash
 
 # Source function files
-source 'src/constants.sh'
-source 'src/helper.sh'
+
+if [ -f "$BASE_DIR/src/constants.sh" ]; then
+    source "$BASE_DIR/src/constants.sh"
+else
+    echo "Error: src/constants.sh not found."
+    exit 1
+fi
 
 # @desc : Create a new Flutter project
 # @param : $1 - applicationName
@@ -84,7 +89,6 @@ createFlutterProject() {
     echo -e "\e[32m 👉 Flutter project created successfully 👏 \e[0m"
 }
 
-
 #@desc : Create a new feature folder structure
 #@param : $1 - featureName
 #@return : void
@@ -123,7 +127,7 @@ createFeatureFoldersStr() {
     touch "$featureName/presentation/screen/.gitkeep"
     mkdir -p "$featureName/presentation/widget"
     touch "$featureName/presentation/widget/.gitkeep"
-    
+
     echo
     printf "%b👉 Folder structure created successfully for feature: %s 👏%b\n" "$GREEN" "$featureName" "$NC"
     echo

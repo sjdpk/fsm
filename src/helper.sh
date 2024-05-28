@@ -1,6 +1,12 @@
 #!/bin/bash
-
-source 'src/constants.sh'
+# Define the base directory
+BASE_DIR=$(dirname "$0")
+if [ -f "$BASE_DIR/src/constants.sh" ]; then
+    source "$BASE_DIR/src/constants.sh"
+else
+    echo "Error: src/constants.sh not found."
+    exit 1
+fi
 
 # @desc: Log error message
 # @param: $1 - message
@@ -23,7 +29,6 @@ is_flutter_project() {
         exit 1
     fi
 }
-
 
 # @desc : Confirm the command
 # @param : $1 - key

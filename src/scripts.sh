@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Source function files
-source 'src/constants.sh'
+if [ -f "$BASE_DIR/src/constants.sh" ]; then
+    source "$BASE_DIR/src/constants.sh"
+else
+    echo "Error: src/constants.sh not found."
+    exit 1
+fi
 
 # @desc : show flutter version
 # @return : flutter version
@@ -90,7 +95,6 @@ downloadFlutterVersion() {
     printf "%b%s%b\n" "$GREEN" "Flutter $version_to_install installed successfully" "$NC"
     printf "%bHINT: Please switch version%b\n" "$YELLOW" "$NC"
 }
-
 
 # @desc : upgrade flutter sdk
 # @return : upgrade flutter sdk
