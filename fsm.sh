@@ -72,7 +72,7 @@ remove)
         logError "Please provide a version number after 'remove' option."
     fi
     ;;
-upgradeFlutterSDK) upgradeFlutterSDK ;;
+flutter-upgrade) upgradeFlutterSDK ;;
 create)
     applicationName=$2
     if [ -n "$applicationName" ]; then

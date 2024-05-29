@@ -123,5 +123,8 @@ removeFlutterVersion() {
 # @example : upgradeFlutterSDK
 
 upgradeFlutterSDK() {
+    flutter_root=$(cd "$(dirname "$(which flutter)")/.." && pwd)
+    command="git -C '$flutter_root' checkout stable >/dev/null 2>&1 &&flutter upgrade --force >/dev/null 2>&1"
+    run_with_spinner "Upgrading Flutter SDK..." "Flutter SDK upgraded successfully" eval "$command"
     flutter upgrade --force
 }
