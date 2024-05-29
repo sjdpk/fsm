@@ -43,10 +43,10 @@ fi
 # Main function
 opt=$1
 case $opt in
--h | help) fsmHelp ;;
--v | version) fsmInformation ;;
--d | doctor) checkFlutterVersion ;;
--ls | list) locallyInstalledFlutterVersionsList ;;
+-h | help | h) fsmHelp ;;
+-v | version | v) fsmInformation ;;
+-d | doctor | d) checkFlutterVersion ;;
+-ls | list | ls ) locallyInstalledFlutterVersionsList ;;
 update) updateFSMVersion ;;
 use)
     version_to_use=$2
