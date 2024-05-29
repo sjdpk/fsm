@@ -80,7 +80,7 @@ function spinner() {
         local i=$(((i + charwidth) % ${#spin}))
         printf "${BLUE}%s $loadingMsg ${NC}" "${spin:i:charwidth}"
         # Move back spinner characters + " Processing"
-        cursorBack $(("$charwidth" + "$msglength"))
+        cursorBack $((charwidth + msglength))
         sleep .1
     done
     tput cnorm
