@@ -78,7 +78,7 @@ function spinner() {
     tput civis # cursor invisible
     while kill -0 "$pid" 2>/dev/null; do
         local i=$(((i + charwidth) % ${#spin}))
-        printf "${GREEN}%s${NC} $loadingMsg" "${spin:i:charwidth}"
+        printf "${BLUE}%s $loadingMsg ${NC}" "${spin:i:charwidth}"
         # Move back spinner characters + " Processing"
         cursorBack $(("$charwidth" + "$msglength"))
         sleep .1
@@ -89,7 +89,7 @@ function spinner() {
     local exit_code=$?
 
     # Clear spinner and show completed message
-    printf "${GREEN}%s${NC} $loadingMsg" "${spin:i:charwidth}"
+    printf "${BLUE}%s $loadingMsg${NC} " "${spin:i:charwidth}"
     if [ -n "$successMsg" ]; then
         echo -e "\n${GREEN}✔ $successMsg ${NC}"
     else
