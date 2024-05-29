@@ -14,7 +14,7 @@ fi
 # @example: logError "Error message"
 
 logError() {
-    printf "%bError : %s%b\n" "$RED" "$1" "$NC"
+    printf "%b! %s%b\n" "$RED" "$1" "$NC"
 }
 
 # @desc : Check if the current directory is a Flutter project
@@ -43,4 +43,70 @@ confirm_command() {
         echo "Command cancelled..."
         return 1
     fi
+}
+
+# @desc: Show a spinner while another command is running
+# @param: $1 - command to run (with any parameters)
+# @return: void
+# @example: spinner sleep 10
+function shutdown() {
+    tput cnorm # reset cursor
+}
+trap shutdown EXIT
+
+function cursorBack() {
+    local num=$1
+    echo -en "\033[${num}D"
+}
+
+function spinner() {
+    # Make sure we use non-unicode character type locale
+    local LC_CTYPE=C
+
+    local pid=$1 # Process ID of the previously running command
+
+    local loadingMsg="$2"
+    local successMsg="$3"
+    # length of the loading message +1
+    local msglength=${#loadingMsg}+1
+
+    # Single spinner style
+    local spin='⣾⣽⣻⢿⡿⣟⣯⣷'
+    local charwidth=3
+
+    local i=0
+    tput civis # cursor invisible
+    while kill -0 "$pid" 2>/dev/null; do
+        local i=$(((i + charwidth) % ${#spin}))
+        printf "${GREEN}%s${NC} $loadingMsg" "${spin:i:charwidth}"
+        # Move back spinner characters + " Processing"
+        cursorBack $(("$charwidth" + "$msglength"))
+        sleep .1
+    done
+    tput cnorm
+    # capture exit code
+    wait "$pid"
+    local exit_code=$?
+
+    # Clear spinner and show completed message
+    printf "${GREEN}%s${NC} $loadingMsg" "${spin:i:charwidth}"
+    if [ -n "$successMsg" ]; then
+        echo -e "\n${GREEN}✔ $successMsg ${NC}"
+    else
+        echo ""
+    fi
+
+    return $exit_code
+}
+
+# @desc: Run a command with a spinner
+# @param: $@ - command to run with spinner
+# @return: void
+# @example: run_with_spinner "Processing..." "Completed with exit code 0" sleep 10
+run_with_spinner() {
+    local loadingMsg="$1"
+    local successMsg="$2"
+    shift 2
+    ("$@") &
+    spinner $! "$loadingMsg" "$successMsg"
 }
