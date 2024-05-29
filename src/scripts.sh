@@ -53,7 +53,7 @@ flutterSDKVersionSwitch() {
     flutter_root=$(cd "$(dirname "$(which flutter)")/.." && pwd)
 
     command="git -C '$flutter_root' checkout '$version_to_use' >/dev/null 2>&1"
-    run_with_spinner "Processing..." "Switched to Flutter $version_to_use " eval "$command"
+    run_with_spinner "Switching to version $version_to_use..." "Switched to Flutter $version_to_use " eval "$command"
 }
 
 # @desc : check if branch is present
