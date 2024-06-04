@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.0] - june 4, 2024
+
+### Feat
+- Add feature create with content [follow clean arch]
+
 ## [1.0.1] - may 28, 2024
 
 ### Feat

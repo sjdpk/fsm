@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export VERSION='1.0.1'
+export VERSION='1.1.0'
 
 # Colors Code
 export RED='\033[0;31m'
