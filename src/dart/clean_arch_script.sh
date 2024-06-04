@@ -98,12 +98,20 @@ createFeatureFoldersStr() {
     is_flutter_project
     local featureName="$1"
 
-    if [ -d "$featureName" ]; then
-        echo
-        logError "Feature '$featureName' already exists. Please choose a different name."
-        echo
-        exit 1
+    command="dart $BASE_DIR/src/dart/feature/feature.dart $featureName"
+    # Execute the command and capture the output and status
+    run_with_spinner "Checking feature $featureName exists or not..." "" printf ""
+    output=$(eval "$command" 2>&1)
+    status=$?
+    # Check if the Dart command was successful
+    if [ $status -ne 0 ]; then
+        # statis code is 4 then already exist
+        if [ $status -eq "$CONFLICT_CODE" ]; then
+            logError "Feature $featureName already exists."
+            exit $status
+        fi
+        logError "$output"
+        exit $status
     fi
-    command="dart $BASE_DIR/src/dart/feature/feature.dart $featureName && dart format $featureName>>/dev/null" 
-    run_with_spinner "Creating feature $featureName..." "Feature $featureName created successfully." eval "$command"
+    run_with_spinner "Creating feature $featureName..." "Feature $featureName created successfully." printf ""
 }
