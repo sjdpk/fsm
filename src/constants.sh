@@ -24,6 +24,8 @@ export PACKAGE_INFO='
 # full name
 export PACKAGE_NAME='Flutter SDK Manager Tool'
 
+export CONFLICT_CODE=4
+
 # desc
 export DESC='A CLI tool for simplifying Flutter SDK management,
 facilitating version switching, and aiding in project creation with

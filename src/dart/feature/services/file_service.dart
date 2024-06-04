@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import '../../common.dart';
 import '../../extensions/string_extension.dart';
 
 class FileService {
@@ -16,9 +17,11 @@ class FileService {
     }
     final path = baseDir + dir.toSnakeCase();
     // check if the directory exists or not
-    if (Directory(path).existsSync()) {
-      return null;
+    final featurePath = baseDir + dir.split("/").first;
+    if (isFeature && Directory(featurePath).existsSync()) {
+      exit(conflictCode);
     }
+
     await Directory(path).create(recursive: true);
     return path;
   }
@@ -41,5 +44,6 @@ class FileService {
       return;
     }
     file.writeAsStringSync(content);
+    Process.run("dart", ["format", filePath]);
   }
 }
