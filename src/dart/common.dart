@@ -18,3 +18,4 @@ getPackageName() {
 }
 
 String get package => getPackageName();
+const int conflictCode = 4;
