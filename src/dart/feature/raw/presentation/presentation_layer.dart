@@ -11,7 +11,10 @@ class PresentationLayer {
   static void createPresentationLayerFolderStr(String featureName) {
     // presentation layer
     final blocFolder = "$featureName/presentation/bloc/$featureName";
-    FileService.createFolder(dir: blocFolder).then((value) {
+    FileService.createFolder(
+      dir: blocFolder,
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_state.dart",
@@ -30,21 +33,26 @@ class PresentationLayer {
       );
     });
 
-    FileService.createFolder(dir: "$featureName/presentation/widgets")
-        .then((value) {
+    FileService.createFolder(
+      dir: "$featureName/presentation/widgets",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_widget.dart",
-        content:PresentationLayerContent. createWidgetContent(featureName),
+        content: PresentationLayerContent.createWidgetContent(featureName),
       );
       FileService.addContentAndFile(
         path: value,
         fileName: "/widgets.dart",
-        content: PresentationLayerContent.createWidgetExportContent(featureName),
+        content:
+            PresentationLayerContent.createWidgetExportContent(featureName),
       );
     });
-    FileService.createFolder(dir: "$featureName/presentation/screens")
-        .then((value) {
+    FileService.createFolder(
+      dir: "$featureName/presentation/screens",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_screen.dart",
@@ -53,7 +61,8 @@ class PresentationLayer {
       FileService.addContentAndFile(
         path: value,
         fileName: "/screens.dart",
-        content: PresentationLayerContent.createScreenExportContent(featureName),
+        content:
+            PresentationLayerContent.createScreenExportContent(featureName),
       );
     });
   }

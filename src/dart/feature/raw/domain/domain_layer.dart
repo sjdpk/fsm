@@ -5,13 +5,15 @@ import 'domain_layer_content.dart';
 /// DomainLayer
 /// @desc: create domain layer folder structure
 class DomainLayer {
-
   // @desc: create domain layer folder structure
   // @param: featureName, name
   // @return: void
   static void createDomainLayerFolderStr(String featureName) {
     // - Entities/$featureName_entity.dart
-    FileService.createFolder(dir: "$featureName/domain/entities").then((path) {
+    FileService.createFolder(
+      dir: "$featureName/domain/entities",
+      isFeature: true,
+    ).then((path) {
       FileService.addContentAndFile(
         path: path,
         fileName: "/${featureName.toSnakeCase()}_entity.dart",
@@ -20,8 +22,10 @@ class DomainLayer {
     });
 
     // - Repositories/$featureName_repository.dart
-    FileService.createFolder(dir: "$featureName/domain/repositories")
-        .then((path) {
+    FileService.createFolder(
+      dir: "$featureName/domain/repositories",
+      isFeature: true,
+    ).then((path) {
       FileService.addContentAndFile(
         path: path,
         fileName: "/${featureName.toSnakeCase()}_repository.dart",
@@ -30,7 +34,10 @@ class DomainLayer {
     });
 
     // - Use Cases/$featureName_usecase.dart
-    FileService.createFolder(dir: "$featureName/domain/usecases").then((value) {
+    FileService.createFolder(
+      dir: "$featureName/domain/usecases",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_usecase.dart",

@@ -10,7 +10,10 @@ class DataLayer {
   // @return: void
   static void createDataLayerFolderStr(String featureName) {
     // - Models/$featureName_model.dart
-    FileService.createFolder(dir: "$featureName/data/models").then((value) {
+    FileService.createFolder(
+      dir: "$featureName/data/models",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_model.dart",
@@ -19,8 +22,10 @@ class DataLayer {
     });
 
     // - Data Sources/Local/Local Data Source
-    FileService.createFolder(dir: "$featureName/data/data_sources/local")
-        .then((value) {
+    FileService.createFolder(
+      dir: "$featureName/data/data_sources/local",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_local_data_source.dart",
@@ -29,8 +34,10 @@ class DataLayer {
     });
 
     // - Remote/Remote Data Source
-    FileService.createFolder(dir: "$featureName/data/data_sources/remote")
-        .then((value) {
+    FileService.createFolder(
+      dir: "$featureName/data/data_sources/remote",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_remote_data_source.dart",
@@ -38,8 +45,10 @@ class DataLayer {
       );
     });
 
-    FileService.createFolder(dir: "$featureName/data/repositories")
-        .then((value) {
+    FileService.createFolder(
+      dir: "$featureName/data/repositories",
+      isFeature: true,
+    ).then((value) {
       FileService.addContentAndFile(
         path: value,
         fileName: "/${featureName.toSnakeCase()}_repository.dart",

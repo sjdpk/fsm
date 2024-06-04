@@ -8,8 +8,13 @@ class FileService {
   // @return: void
   static Future<String?> createFolder({
     required String dir,
+    bool isFeature = false,
   }) async {
-    final path = dir.toSnakeCase();
+    String baseDir = "";
+    if (isFeature) {
+      baseDir = "lib/src/features/";
+    }
+    final path = baseDir + dir.toSnakeCase();
     // check if the directory exists or not
     if (Directory(path).existsSync()) {
       return null;
