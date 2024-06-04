@@ -104,31 +104,6 @@ createFeatureFoldersStr() {
         echo
         exit 1
     fi
-
-    mkdir -p "$featureName/data/datasource/local"
-    touch "$featureName/data/datasource/local/.gitkeep"
-    mkdir -p "$featureName/data/datasource/remote"
-    touch "$featureName/data/datasource/remote/.gitkeep"
-    mkdir -p "$featureName/data/models"
-    touch "$featureName/data/models/.gitkeep"
-    mkdir -p "$featureName/data/repository"
-    touch "$featureName/data/repository/.gitkeep"
-
-    mkdir -p "$featureName/domain/entity"
-    touch "$featureName/domain/entity/.gitkeep"
-    mkdir -p "$featureName/domain/repository"
-    touch "$featureName/domain/repository/.gitkeep"
-    mkdir -p "$featureName/domain/usecase"
-    touch "$featureName/domain/usecase/.gitkeep"
-
-    mkdir -p "$featureName/presentation/bloc"
-    touch "$featureName/presentation/bloc/.gitkeep"
-    mkdir -p "$featureName/presentation/screen"
-    touch "$featureName/presentation/screen/.gitkeep"
-    mkdir -p "$featureName/presentation/widget"
-    touch "$featureName/presentation/widget/.gitkeep"
-
-    echo
-    printf "%b👉 Folder structure created successfully for feature: %s 👏%b\n" "$GREEN" "$featureName" "$NC"
-    echo
+    command="dart $BASE_DIR/src/dart/feature/feature.dart $featureName && dart format $featureName>>/dev/null" 
+    run_with_spinner "Creating feature $featureName..." "Feature $featureName created successfully." eval "$command"
 }

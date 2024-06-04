@@ -33,10 +33,10 @@ else
     exit 1
 fi
 
-if [ -f "$BASE_DIR/src/flutter/clean_arch_script.sh" ]; then
-    source "$BASE_DIR/src/flutter/clean_arch_script.sh"
+if [ -f "$BASE_DIR/src/dart/clean_arch_script.sh" ]; then
+    source "$BASE_DIR/src/dart/clean_arch_script.sh"
 else
-    echo "Error: src/flutter/clean_arch_script.sh not found."
+    echo "Error: src/dart/clean_arch_script.sh not found."
     exit 1
 fi
 
@@ -64,7 +64,7 @@ install)
         logError "Please provide a version number after 'install' option."
     fi
     ;;
-remove)
+-r | remove)
     version_to_remove=$2
     if [ -n "$version_to_remove" ]; then
         removeFlutterVersion "$version_to_remove"
