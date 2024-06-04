@@ -19,37 +19,65 @@ To install FSM, use the following commands based on your shell environment:
 
 ## Installation Instructions
 
-| **Shell**     | **Command**                                                                                                               |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| **Bash**       | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc`        |
-| **Zsh**        | `git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc`          |
-| **Fish**       | ```fish git clone https://github.com/sjdpk/fsm.git ~/.fsm echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.config/fish/config.fish source ~/.config/fish/config.fish``` |
-| **PowerShell** | ```powershell git clone https://github.com/sjdpk/fsm.git $HOME/.fsm Add-Content $PROFILE.CurrentUserAllHosts "`nfunction fsm { $HOME/.fsm/fsm.ps1 }"``` |
-| **Others**     | 1. Clone the repository: `git clone https://github.com/sjdpk/fsm.git ~/.fsm`<br> 2. Export path in your shell configuration file. Example:<br> - Bash/Zsh: `alias fsm=~/.fsm/fsm.sh`<br> - Fish: `alias fsm=~/.fsm/fsm.sh`<br> - PowerShell: `function fsm { $HOME/.fsm/fsm.ps1 }`<br> 3. Restart your shell or run appropriate commands to apply changes. |
+```bash
+# echo $SHELL : Bash
+git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.bashrc && source ~/.bashrc
+```
+```bash
+# echo $SHELL : Zsh
+git clone https://github.com/sjdpk/fsm.git ~/.fsm && echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.zshrc && source ~/.zshrc
+```
+```bash
+# echo $SHELL : Fish
+fish git clone https://github.com/sjdpk/fsm.git ~/.fsm echo 'alias fsm=~/.fsm/fsm.sh' >> ~/.config/fish/config.fish source ~/.config/fish/config.fish
+```
+```bash
+# echo $SHELL : PowerShell
+powershell git clone https://github.com/sjdpk/fsm.git $HOME/.fsm Add-Content $PROFILE.CurrentUserAllHosts "`nfunction fsm { $HOME/.fsm/fsm.ps1 }"
+```
+```bash
+# echo $SHELL : Others
+1. Clone: git clone https://github.com/sjdpk/fsm.git ~/.fsm
+
+2. Export path in your shell configuration file. Example:
+  - Bash/Zsh: alias fsm=~/.fsm/fsm.sh
+  - Fish: alias fsm=~/.fsm/fsm.sh
+  - PowerShell: function fsm { $HOME/.fsm/fsm.ps1 }
+
+3. Restart your shell or run appropriate commands to apply changes
+```
+
 
 Ensure to restart your shell or run the appropriate commands to apply the changes.
 
 
 ## Usage
-Usage : `fsm [OPTIONS]`
+Usage: `fsm [OPTIONS]`
 
+| Description                                | Command                      |
+| ------------------------------------------ | ---------------------------- |
+| Help                                       | `fsm help`                   |
+| Display FSM Version Information            | `fsm -v` or `fsm version`    |
+| Check Flutter Version                      | `fsm doctor` or `fsm -d`     |
+| List Locally Installed Flutter Versions    | `fsm ls` or `fsm --list`     |
+| Update FSM Version                         | `fsm update`                 |
+| Upgrade Flutter to Latest SDK              | `fsm flutter-upgrade`        |
+| Switch to a Specific Flutter SDK Version   | `fsm use <version>`          |
+| Switch Flutter Version Example             | `fsm use "3.10.4"`           |
+| Install a Specific Flutter SDK Version     | `fsm install <version>`      |
+| Install Flutter Version Example            | `fsm install "3.10.5"`       |
+| Remove a Specific Flutter SDK Version      | `fsm remove <version>`      |
+| Remove Flutter Version Example             | `fsm remove "3.10.5"`       |
+| Create a New Flutter Project               | `fsm create <name>`          |
+| Create Flutter Project Example             | `fsm create awesomeProject`  |
+| Create a New Feature Folder                | `fsm feature <name>`         |
+| Create Feature Folder Example              | `fsm feature authentication` |
 
-| Description                 | Command                  |
-| --------------------------- | ------------------------ |
-| Help                        | `fsm help`               |
-| Display Flutter Version     | `fsm -v`                 |
-| Display Flutter Version (alternative) | `flutter --version` |
-| Display FSM Info             | `fsm info`               |
-| Update FSM Version           | `fsm update`             |
-| List all Flutter SDK         | `fsm ls` or `fsm --list` |
-| Switch Flutter Version       | `fsm use <version>`      |
-| Switch Flutter Version Example | `fsm use "3.10.4"`       |
-| Install Flutter Version     | `fsm install <version>` |
-| Install Flutter Version Example | `fsm install "3.10.5"` |
-| Create Flutter Project | `fsm create <appName>` |
-| Create Flutter Project Example | `fsm create awesomeProject` |
-| Create Feature Folder | `fsm feature <featureName>` |
-| Create Flutter Project Example | `fsm feature authentication` |
+### Examples
+```bash
+# Display the help message with the available options.
+fsm help
+```
 
 
 Switch to a different version of Flutter, use the `fsm` command followed by the desired version:
