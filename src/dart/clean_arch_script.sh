@@ -106,7 +106,7 @@ createFeatureFoldersStr() {
     # Check if the Dart command was successful
     if [ $status -ne 0 ]; then
         # statis code is 4 then already exist
-        if [ $status -eq "$CONFLICT_CODE" ]; then
+        if [ "$status" -eq "$CONFLICT_CODE" ]; then
             logError "Feature $featureName already exists."
             exit $status
         fi

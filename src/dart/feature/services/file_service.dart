@@ -17,9 +17,11 @@ class FileService {
     }
     final path = baseDir + dir.toSnakeCase();
     // check if the directory exists or not
-    if (Directory(path).existsSync()) {
+    final featurePath = baseDir + dir.split("/").first;
+    if (isFeature && Directory(featurePath).existsSync()) {
       exit(conflictCode);
     }
+
     await Directory(path).create(recursive: true);
     return path;
   }
