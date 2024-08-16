@@ -124,7 +124,7 @@ class PresentationLayerContent {
       class ${featureName.capitalize()}Bloc extends Bloc<${featureName.capitalize()}Event, ${featureName.capitalize()}State> {
         final ${featureName.capitalize()}UseCase _useCase;
         ${featureName.capitalize()}Bloc(this._useCase) : super(${featureName.capitalize()}Initial()){
-          on<${featureName.capitalize()}Event>(on${featureName.capitalize()}Event);
+          on<${featureName.capitalize()}Fetch>(on${featureName.capitalize()}Event);
         }
 
         FutureOr<void> on${featureName.capitalize()}Event(${featureName.capitalize()}Event event, Emitter<${featureName.capitalize()}State> emit) async {
