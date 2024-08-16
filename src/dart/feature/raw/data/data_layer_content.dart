@@ -33,7 +33,7 @@ class DataLayerContent {
 
   // @desc: create remote data source content
   // @param: featureName, name
-  // @return: String 
+  // @return: String
   static String createRemoteDataSourceContent(String featureName) {
     return '''
       import 'package:http/http.dart' as http;
@@ -67,7 +67,7 @@ class DataLayerContent {
       import 'dart:convert';
       import 'package:$package/src/core/network/data_state.dart';
       import '../../domain/repositories/${featureName.toSnakeCase()}_repository.dart';
-      import '../datasources/remote//${featureName.toSnakeCase()}_remote_data_source.dart';
+      import '../datasources/remote/${featureName.toSnakeCase()}_remote_data_source.dart';
       import '../models/${featureName.toSnakeCase()}_model.dart';
 
       class ${featureName.capitalize()}RepositoryImpl implements ${featureName.capitalize()}Repository {
