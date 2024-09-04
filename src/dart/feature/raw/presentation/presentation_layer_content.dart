@@ -3,7 +3,7 @@ import '../../../extensions/string_extension.dart';
 
 /// PresentationLayerContent
 /// This class is used to store the presentation layer content
-/// 
+///
 class PresentationLayerContent {
   // @desc: create screen content
   // @param: featureName, name
@@ -91,7 +91,7 @@ class PresentationLayerContent {
 
   // @desc: create bloc export content
   // @param: featureName, name
-  // @return: String   
+  // @return: String
   static String createBlocEventContent(String featureName) {
     return '''
       part of "${featureName.toSnakeCase()}_bloc.dart";
@@ -127,7 +127,7 @@ class PresentationLayerContent {
           on<${featureName.capitalize()}Fetch>(on${featureName.capitalize()}Event);
         }
 
-        FutureOr<void> on${featureName.capitalize()}Event(${featureName.capitalize()}Event event, Emitter<${featureName.capitalize()}State> emit) async {
+        FutureOr<void> on${featureName.capitalize()}Event(${featureName.capitalize()}Fetch event, Emitter<${featureName.capitalize()}State> emit) async {
           final dataState = await _useCase.get();
           if (dataState is DataSucessState<${featureName.capitalize()}Entity>) {
             emit(${featureName.capitalize()}Loaded(dataState.data!));
