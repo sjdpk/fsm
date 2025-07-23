@@ -104,7 +104,6 @@ eg: fsm use 3.10.4
   <tbody>
     <tr>
       <td align="center" valign="top" width="25%"><a href="https://github.com/sjdpk"><img src="https://avatars.githubusercontent.com/sjdpk?v=4?s=50" width="50px;" alt="Deepak Sapkota"/><br /><sub><b>Deepak Sapkota</b></sub></a><br /></td>
-      <td align="center" valign="top" width="25%"><a href="https://github.com/rajan-poudel"><img src="https://avatars.githubusercontent.com/rajan-poudel?v=4?s=50" width="50px;" alt="Rajan Paudel"/><br /><sub><b>Rajan Paudel</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
